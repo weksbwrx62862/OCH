@@ -1,4 +1,15 @@
-# OpenClaw-Harness
+<div align="center">
+
+# 🔧 OpenClaw-Harness
+
+**企业级智能体基础设施 — 安全沙箱 · 工具调度 · 代码执行**
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-Apache--2.0-green)
+![GitHub Stars](https://img.shields.io/github/stars/weksbwrx62862/OCH?style=social)
+![Last Commit](https://img.shields.io/github/last-commit/weksbwrx62862/OCH)
+
+</div>
 
 OpenClaw-Harness（OCH）是一个多智能体协作平台，基于 OpenHarness 核心框架构建，提供完整的后端 API 和现代化前端界面。平台支持智能体管理、实时会话聊天、DAG 任务调度、技能编排、RBAC 权限控制、MCP 服务器管理、多渠道集成等能力，旨在为企业和开发者提供一站式的 AI 智能体编排与协作解决方案。
 
@@ -645,9 +656,128 @@ docker-compose ps
 
 ---
 
+## FAQ
+
+<details>
+<summary><b>Q: Can I use OpenClaw without the Agent module?</b></summary>
+
+Yes! OpenClaw is modular by design. The Filesystem module works standalone:
+```python
+from workbuddy.fs import FileSystem
+fs = FileSystem()
+```
+The Agent module adds orchestration capabilities but is not required.
+</details>
+
+<details>
+<summary><b>Q: What's the difference between Work Buddy and Code Buddy?</b></summary>
+
+**Work Buddy** focuses on file management and content operations (create, edit, organize files).
+**Code Buddy** extends Work Buddy with code quality tools (linting, testing, type checking).
+**OpenClaw Agent** orchestrates both with LLM-based reasoning.
+</details>
+
+<details>
+<summary><b>Q: How do I configure custom tools?</b></summary>
+
+Create a Python file with tool functions and register them:
+```python
+from openclaw.tools import Tool
+def my_custom_tool(param: str) -> str:
+    return f"Result: {param}"
+custom = Tool("my_tool", my_custom_tool, description="My custom tool")
+agent = Agent(tools=[custom])
+```
+</details>
+
+<details>
+<summary><b>Q: Which LLM providers are supported?</b></summary>
+
+OpenClaw supports multiple LLM providers through a unified interface. Current support includes OpenAI, Anthropic, and any OpenAI-compatible API (local models, Azure, etc.).
+</details>
+
+<details>
+<summary><b>Q: How do I contribute a new skill?</b></summary>
+
+See the [Contributing](#contributing) section. The recommended approach is:
+1. Fork the repository
+2. Create a branch `feat/my-skill`
+3. Add your skill under the appropriate module
+4. Submit a Pull Request
+</details>
+
+---
+
 ## 许可证
 
 [MIT License](LICENSE)
+
+---
+
+## 安全
+
+OpenClaw-Harness 采用安全沙箱架构，所有工具执行均在隔离环境中进行。
+
+如发现安全漏洞，请通过以下方式报告（**不要**创建公开 Issue）：
+
+- **邮箱**: security@openclaw.dev
+- **响应时间**: 72 小时内确认，30 天内修复
+
+---
+
+## 致谢
+
+- [OpenAI](https://openai.com) — GPT 系列模型
+- [Anthropic](https://anthropic.com) — Claude 系列模型
+- [LangChain](https://langchain.com) — Agent 编排框架
+- [Playwright](https://playwright.dev) — 浏览器自动化
+- [qoder](https://www.qoder.fun) — 社区生态
+
+---
+
+## 开发指南
+
+### 本地开发环境
+
+```bash
+# 克隆仓库
+git clone https://github.com/weksbwrx62862/OCH.git
+cd OCH
+
+# 创建虚拟环境
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+# venv\Scripts\activate   # Windows
+
+# 安装开发依赖
+pip install -e ".[dev]"
+
+# 运行测试
+pytest tests/ -v
+
+# 运行 lint
+ruff check src/
+mypy src/
+```
+
+### 代码规范
+
+- **类型注解**: 所有公共函数必须有完整的类型注解
+- **Docstring**: 使用 Google 风格的 docstring
+- **测试**: 新功能必须包含单元测试
+- **提交**: 使用 Conventional Commits 规范（`feat:`、`fix:`、`docs:` 等）
+
+---
+
+## 路线图
+
+| 阶段 | 目标 | 状态 |
+|------|------|------|
+| **Phase 1** | Filesystem + Terminal 沙箱 | ✅ 已完成 |
+| **Phase 2** | Browser 自动化 + 代码执行 | ✅ 已完成 |
+| **Phase 3** | Agent 编排 + 工具链 | 🔄 开发中 |
+| **Phase 4** | 多模态支持 + RAG 集成 | 📋 计划中 |
+| **Phase 5** | 企业级部署 + 监控 | 📋 计划中 |
 
 ---
 
@@ -660,3 +790,13 @@ docker-compose ps
 5. 创建 Pull Request
 
 欢迎提交 Issue 和 Pull Request，共同完善 OpenClaw-Harness！
+
+---
+
+<div align="center">
+
+**OpenClaw-Harness** — 让智能体安全、高效地使用工具
+
+[⬆ 回到顶部](#-openclaw-harness)
+
+</div>
