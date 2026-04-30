@@ -1,0 +1,11 @@
+[
+  {
+    "id": "msg-1776089511099-g5cpz8",
+    "from": "team-lead",
+    "to": "researcher",
+    "type": "message",
+    "content": "## Research 任务 — sessions.py queue 未定义问题\n\n请深入调查 `backend/app/api/sessions.py` 第 429 行 `queue` 变量未定义的问题：\n\n1. 读取 sessions.py 第 400-460 行，理解上下文\n2. 搜索整个项目中 `queue` 的定义和使用\n3. 确认这应该是：\n   - 某个模块的导入（如 `from queue import Queue`）\n   - 还是变量名拼写错误（如应该是 `request_queue` 或 `task_queue`）\n4. 检查是否有其他地方引用了同一变量\n\n将发现更新到 .plans/findings.md 并通过 send_message 发送给 backend-dev 和 main。",
+    "timestamp": "2026-04-13T14:11:51.099Z",
+    "read": true
+  }
+]

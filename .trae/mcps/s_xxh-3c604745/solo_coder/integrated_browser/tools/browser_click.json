@@ -1,0 +1,64 @@
+{
+  "name": "browser_click",
+  "description": "Perform click on a web page. Supports single/double click, different mouse buttons, modifier keys, position offsets, and hold duration.\n",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "element": {
+        "description": "Human-readable element description used to obtain permission to interact with the element",
+        "type": "string"
+      },
+      "ref": {
+        "description": "Exact target element reference from the page snapshot",
+        "type": "string"
+      },
+      "doubleClick": {
+        "description": "Whether to perform a double click instead of a single click",
+        "type": "boolean"
+      },
+      "button": {
+        "description": "Mouse button to click. Defaults to \"left\".",
+        "type": "string",
+        "enum": [
+          "left",
+          "right",
+          "middle"
+        ]
+      },
+      "modifiers": {
+        "description": "Modifier keys to hold during click. \"ControlOrMeta\" uses Ctrl on Windows/Linux and Cmd on Mac.",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "Control",
+            "Shift",
+            "Alt",
+            "Meta",
+            "ControlOrMeta"
+          ]
+        }
+      },
+      "offsetX": {
+        "description": "Horizontal offset from element's left edge in pixels. If omitted, clicks at horizontal center.",
+        "type": "number"
+      },
+      "offsetY": {
+        "description": "Vertical offset from element's top edge in pixels. If omitted, clicks at vertical center.",
+        "type": "number"
+      },
+      "holdDurationMs": {
+        "description": "Duration to hold the mouse button down before releasing, in milliseconds. Useful for long-press interactions. Defaults to 0 (immediate release).",
+        "type": "number"
+      },
+      "viewId": {
+        "description": "Target browser tab ID. If omitted, uses the last interacted tab.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "element",
+      "ref"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "msg-1776089515411-w27x14",
+    "from": "team-lead",
+    "to": "frontend-dev",
+    "type": "message",
+    "content": "## Frontend Dev 任务 — P1 修复（ESLint）\n\n请修复前端 ESLint 中的可安全自动修复问题，参考 .plans/findings.md：\n\n### 修复列表\n1. **no-require-imports**（16 个）— 测试文件中的 `require()` 改为 ES `import`\n   - `__tests__/app/agents.test.tsx`: 行 42, 84\n   - `__tests__/app/plugins.test.tsx`: 行 33, 101, 208, 233, 257, 284, 315\n   - `__tests__/app/sandbox.test.tsx`: 行 52, 88, 106, 129, 142, 192, 234, 265\n   - `__tests__/components/HomePage.test.tsx`: 行 50\n   - `__tests__/hooks/useApi.test.tsx`: 行 17\n\n2. **no-explicit-any**（9 个）— 测试文件中的 `any` 替换为具体类型\n   - `__tests__/app/plugins.test.tsx`: 行 36-43, 48, 54, 60, 68, 70\n\n### 修复规则\n- 先检查 .plans/known_pitfalls.md\n- require → import 时注意：jest.mock 的 require 保留不修\n- any 替换时需要理解实际数据类型，不确定的用 `unknown` + 类型断言\n- 不修改 next-env.d.ts\n- 修复完成后通知 reviewer 审查",
+    "timestamp": "2026-04-13T14:11:55.411Z",
+    "read": true
+  }
+]

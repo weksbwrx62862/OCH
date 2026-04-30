@@ -1,0 +1,11 @@
+[
+  {
+    "id": "msg-1776089513200-m3iag7",
+    "from": "team-lead",
+    "to": "backend-dev",
+    "type": "message",
+    "content": "## Backend Dev 任务 — P1 修复（ruff lint）\n\n请修复后端 ruff lint 中的可安全自动修复问题，参考 .plans/findings.md：\n\n### 修复列表（共 25 个）\n1. **F401 未使用导入**（17 个）— 删除未使用的 import\n2. **F541 f-string 无占位符**（1 个）— `app/api/agents.py:263`，移除 f 前缀\n3. **F841 未使用变量**（1 个）— `openharness/msa/service_wrapper.py:274`，删除 offset 变量\n\n### 修复规则\n- 先检查 .plans/known_pitfalls.md\n- 条件导入（try/except 中的）不要删除\n- 每修复一批文件后，运行 `ruff check <file>` 确认\n- 修复完成后通知 reviewer 审查\n\n### ⚠️ 注意\n- 暂不修复 P0 的 sessions.py queue 问题（等 researcher 调查结果）\n- 不修复 Liskov 违反和 fcntl 类型问题",
+    "timestamp": "2026-04-13T14:11:53.200Z",
+    "read": true
+  }
+]
