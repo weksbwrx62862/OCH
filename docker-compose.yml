@@ -1,0 +1,72 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: och
+      POSTGRES_PASSWORD: och123
+      POSTGRES_DB: openclaw_harness
+    # 使用 5433 映射，避免与本地 PostgreSQL 默认端口 5432 冲突
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U och"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    # 使用 6380 映射，避免与本地 Redis 默认端口 6379 冲突
+    ports:
+      - "6380:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8008:8008"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://och:och123@postgres:5432/openclaw_harness
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8008/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    volumes:
+      - ~/.och:/root/.och
+      - ~/.openclaw:/root/.openclaw
+    command: python -m app.main
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_URL=http://backend:8008
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  redisdata:

@@ -1,0 +1,66 @@
+# ============================================
+# OpenClaw-Harness Backend Dependencies
+# ============================================
+
+# --- Core Web Framework ---
+Flask>=3.0.0
+flask-cors>=4.0.0
+flask-socketio>=5.3.0
+flasgger>=0.9.7
+gunicorn>=21.2.0
+uvicorn[standard]>=0.24.0
+python-socketio>=5.9.0
+
+# --- ASGI Support (可选，用于混合部署) ---
+asgiref>=3.7.0
+
+# --- Database ---
+SQLAlchemy[asyncio]>=2.0.23
+aiosqlite>=0.19.0          # SQLite async (dev)
+asyncpg>=0.29.0             # PostgreSQL async (prod)
+alembic>=1.12.1
+
+# --- Validation & Serialization ---
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+marshmallow>=3.20.1
+
+# --- Authentication & Security ---
+PyJWT>=2.8.0
+bcrypt>=4.1.0
+python-dotenv>=1.0.0
+
+# --- Caching & Queue ---
+redis>=5.0.0
+hiredis>=3.0.0
+
+# --- HTTP Client ---
+httpx>=0.25.0               # Async HTTP (for LLM APIs)
+aiohttp>=3.9.0                # Alternative async client
+
+# --- Utilities ---
+python-multipart>=0.0.6      # File uploads
+python-dateutil>=2.8.2       # Date parsing
+orjson>=3.9                  # Fast JSON
+
+# --- OpenHarness Dependencies ---
+anthropic>=0.40.0
+openai>=1.10.0
+rich>=13.7.0
+prompt-toolkit>=3.0.36
+pyperclip>=1.9.0
+pyyaml>=6.0.1
+watchfiles>=0.20.0
+croniter>=2.0.0
+websockets>=12.0
+mcp>=1.0.0
+
+# --- Testing ---
+pytest>=7.4.3
+pytest-asyncio>=0.23.0
+pytest-cov>=4.1.0
+httpx>=0.25.0                # For TestClient
+
+# --- Development ---
+ruff>=0.1.6
+mypy>=1.7.1
