@@ -106,3 +106,6 @@ docs/_build/
 
 # Trae agent files (local only)
 .trae/
+
+# Claude Code local config
+.claude/
